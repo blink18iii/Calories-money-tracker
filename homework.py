@@ -8,7 +8,18 @@ class Calculator:
         self.limit = limit
         self.records = []
 
+    def add_record()
+    def get_today_stats()
+    def get_calories_remained()
+    def get_week_stats()
 
+
+class CashCalculator:
+    def __init__(self,):
+    def add_record(self):
+    def get_today_stats():
+    def get_today_cash_remained(self, currency: float):
+    def get_week_stats(self):
 
 
 class Record:
@@ -19,3 +30,4 @@ class Record:
             self.date = dt.datetime.strptime(date, date_format)
         else:
             self.date = dt.datetime.today()
+

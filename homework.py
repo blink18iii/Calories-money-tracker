@@ -8,26 +8,29 @@ class Calculator:
         self.limit = limit
         self.records = []
 
-    def add_record()
+    def add_record(self,new_record: str) -> None
+        """Adding new record"""
+        self.records.append(new_record)
     def get_today_stats()
+        """How much calories were eaten"""
     def get_calories_remained()
     def get_week_stats()
 
 
-class CashCalculator:
-    def __init__(self,):
-    def add_record(self):
-    def get_today_stats():
+class CashCalculator(Calculator):
+
     def get_today_cash_remained(self, currency: float):
-    def get_week_stats(self):
+
 
 
 class Record:
-    def __init__(self, amount: float, date: str, comment: str = None):
+    """Creating a record"""
+    def __init__(self, amount: float, comment: str, date: str = None):
         self.amount = float(amount)
         self.comment = comment
+        self.date = date
         if date is not None:
-            self.date = dt.datetime.strptime(date, date_format)
+            self.date = dt.datetime.strptime(date, date_format).date()
         else:
             self.date = dt.datetime.today()
 

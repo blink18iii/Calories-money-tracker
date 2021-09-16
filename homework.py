@@ -8,16 +8,29 @@ class Calculator:
         self.limit = limit
         self.records = []
 
-    def add_record(self,new_record: str) -> None
+    def add_record(self,new_record: str) -> None:
         """Adding new record"""
         self.records.append(new_record)
-    def get_today_stats()
+
+    def get_today_stats():
         """How much calories were eaten"""
-    def get_calories_remained()
-    def get_week_stats()
+        today_stats = dt.date.today()
+        sum(record.amount)
+
+    def get_calories_remained():
+
+
+    def get_week_stats():
+        """Record total week calories"""
+        today_stats = dt.date.today()
+        week_ago_stats = today_stats - dt.timedelta(days = 7)
+        return float(sum(record.amount))
 
 
 class CashCalculator(Calculator):
+    USD_RATE = 80.0
+    EURO_RATE = 90.0
+    RUB_RATE = 1.0
 
     def get_today_cash_remained(self, currency: float):
 

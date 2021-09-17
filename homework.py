@@ -82,3 +82,5 @@ class CaloriesCalculator(Calculator):
                     f'но с общей калорийностью не более {spent_today} кКал')
         else:
             return 'Хватит есть!'
+Calculator.add_record()
+CashCalculator.get_today_stats()

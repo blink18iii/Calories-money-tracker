@@ -57,7 +57,7 @@ class CashCalculator(Calculator):
         }
 
         if currency not in currencies:
-            message = (f'Валюта введена некорректно, еще раз.')
+            message = 'Валюта введена некорректно, еще раз.'
             return message
         currency_name, currency_rate = currencies[currency]
         cash_remained = self.get_today_remained()

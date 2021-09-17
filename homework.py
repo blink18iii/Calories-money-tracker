@@ -16,8 +16,6 @@ class Record:
 
 class Calculator:
     """Родительский класс."""
-    d_today = dt.date.today()
-
     def __init__(self, limit: float) -> None:
         self.limit = limit
         self.records = []
@@ -30,14 +28,14 @@ class Calculator:
         """Сколько потрачено за сегодня."""
         return sum([record.amount
                     for record in self.records
-                    if record.date == d_today])
+                    if record.date == dt.date.today()])
 
     def get_week_stats(self) -> float:
         """Сколько потрачено за 7 дней без сегодня."""
-        date_week_ago = d_today - dt.timedelta(days=7)
+        date_week_ago = dt.date.today() - dt.timedelta(days=7)
         return float(sum([record.amount
                           for record in self.records
-                          if date_week_ago < record.date <= d_today]))
+                          if date_week_ago < record.date <= dt.date.today()]))
 
     def get_today_remained(self) -> float:
         """Сколько еще можно потратить за сегодня."""
@@ -66,8 +64,8 @@ class CashCalculator(Calculator):
         if cash_remained == 0:
             return 'Денег нет, держись'
 
-        today_spent_currency = round((spent_today / currency_rate), 2)
-        if spent_today > 0:
+        today_spent_currency = round((cash_remained / currency_rate), 2)
+        if cash_remained > 0:
             return(f'На сегодня осталось {today_spent_currency} '
                    f'{currency_name}')
         else:
@@ -84,3 +82,4 @@ class CaloriesCalculator(Calculator):
                     f'но с общей калорийностью не более {spent_today} кКал')
         else:
             return 'Хватит есть!'
+        

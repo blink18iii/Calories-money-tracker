@@ -5,7 +5,10 @@ date_format = '%d.%m.%Y'
 
 class Record:
     """Создаёт записи."""
+<<<<<<< HEAD
 
+=======
+>>>>>>> 8252034c5b89ca7ae429efb2f67ec99a059ae2e4
     def __init__(self, amount: float, comment: str, date: str = None):
         self.amount = amount
         self.comment = comment
@@ -21,9 +24,15 @@ class Calculator:
         self.limit = limit
         self.records = []
 
+<<<<<<< HEAD
     def add_record(self, record: Record) -> None:
         """Добавление новой записи к списку."""
         self.records.append(record)
+=======
+    def add_record(self, new_record: Record) -> None:
+        """Добавление новой записи к списку."""
+        self.records.append(new_record)
+>>>>>>> 8252034c5b89ca7ae429efb2f67ec99a059ae2e4
 
     def get_today_stats(self) -> float:
         """Сколько потрачено за сегодня."""
@@ -50,7 +59,11 @@ class CashCalculator(Calculator):
     RUB_RATE = 1.0
 
     def get_today_cash_remained(self, currency: str) -> str:
+<<<<<<< HEAD
         """Сколько еще можно потратить."""
+=======
+        """Сколько денег можно еще потратить."""
+>>>>>>> 8252034c5b89ca7ae429efb2f67ec99a059ae2e4
         currencies = {
             'usd': ('USD', self.USD_RATE),
             'eur': ('Euro', self.EURO_RATE),
@@ -58,7 +71,11 @@ class CashCalculator(Calculator):
         }
 
         if currency not in currencies:
+<<<<<<< HEAD
             message = f'Валюта введена некорректно.'
+=======
+            message = 'Валюта введена некорректно, еще раз.'
+>>>>>>> 8252034c5b89ca7ae429efb2f67ec99a059ae2e4
             return message
         currency_name, currency_rate = currencies[currency]
         cash_remained = self.get_today_remained()
@@ -76,11 +93,20 @@ class CashCalculator(Calculator):
 
 class CaloriesCalculator(Calculator):
     def get_calories_remained(self) -> str:
+<<<<<<< HEAD
         """Сколько можно еще съесть за сегодня."""
+=======
+        """Сколько можно еще съесть."""
+>>>>>>> 8252034c5b89ca7ae429efb2f67ec99a059ae2e4
         spent_today = round(self.get_today_remained())
         if spent_today > 0:
             return (f'Сегодня можно съесть что-нибудь ещё, '
                     f'но с общей калорийностью не более {spent_today} кКал')
         else:
             return 'Хватит есть!'
+<<<<<<< HEAD
 
+=======
+Calculator.add_record()
+CashCalculator.get_today_stats()
+>>>>>>> 8252034c5b89ca7ae429efb2f67ec99a059ae2e4

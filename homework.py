@@ -58,20 +58,20 @@ class CashCalculator(Calculator):
         }
 
         if currency in currencies:
-            currency_number = currencies[currency][0]
+            currency_rate = currencies[currency][0]
             currency_name = currencies[currency][1]
         else:
             return ('Валюта не найдена')
         if today_stats < self.limit:
             return ('На сегодня осталось '
-                    f'{round(other_limit / currency_number, 2)} '
+                    f'{round(other_limit / currency_rate, 2)} '
                     f'{currency_name}')
         elif today_stats == self.limit:
             return ('Денег нет, держись')
         elif today_stats > self.limit:
             debt = abs(other_limit)
             return ('Денег нет, держись: твой долг - '
-                    f'{round(debt / currency_number, 2)} {currency_name}')
+                    f'{round(debt / currency_rate, 2)} {currency_name}')
 
 
 class CaloriesCalculator(Calculator):

@@ -5,6 +5,7 @@ date_format = '%d.%m.%Y'
 
 class Record:
     """Создаёт записи."""
+
     def __init__(self, amount: float, comment: str, date=None):
         self.amount = amount
         self.comment = comment
@@ -44,31 +45,32 @@ class Calculator:
 
 
 class CashCalculator(Calculator):
-    USD_RATE = float(78.0)
-    EURO_RATE = float(87.0)
-    RUB_RATE = float(1.0)
+    USD_RATE = 73.12
+    EURO_RATE = 85.12
 
-    def get_today_cash_remained(self, currency: str) -> str:
-        """Сколько еще можно потратить."""
+    def get_today_cash_remained(self, currency):
+        today_stats = self.get_today_stats()
+        other_limit = self.limit - today_stats
         currencies = {
-            'usd': ('USD', self.USD_RATE),
-            'eur': ('Euro', self.EURO_RATE),
-            'rub': ('руб', self.RUB_RATE)}
-        if currency not in currencies:
-            message = 'Валюта введена некорректно.'
-            return message
-        currency_name, currency_rate = currencies[currency]
-        cash_remained = self.get_today_remained()
-        if cash_remained <= 0:
-            return 'Денег нет, держись'
+             'usd': (self.USD_RATE, 'USD'),
+             'eur': (self.EURO_RATE, 'Euro'),
+             'rub': (1, 'руб')
+        }
 
-        today_spent_currency = round(abs(cash_remained / currency_rate), 2)
-        if cash_remained > 0:
-            return(f'На сегодня осталось {today_spent_currency} '
-                   f'{currency_name}')
+        if currency in currencies:
+            currency_number = currencies[currency][0]
+            currency_name = currencies[currency][1]
         else:
-            return(f'Денег нет, держись: твой долг '
-                   f'{today_spent_currency} {currency_name}')
+            return ('Валюта не найдена')
+        if today_stats < self.limit:
+            return ('На сегодня осталось '
+                    f'{round(other_limit / currency_number, 2)} {currency_name}')
+        elif today_stats == self.limit:
+            return ('Денег нет, держись')
+        elif today_stats > self.limit:
+            debt = abs(other_limit)
+            return ('Денег нет, держись: твой долг - '
+                    f'{round(debt / currency_number, 2)} {currency_name}')
 
 
 class CaloriesCalculator(Calculator):
@@ -80,3 +82,8 @@ class CaloriesCalculator(Calculator):
                     f'но с общей калорийностью не более {spent_today} кКал')
         else:
             return 'Хватит есть!'
+
+
+cash_calculator = CashCalculator(1000)
+cash_calculator.add_record(Record(amount=1001, comment="Coffeeffee"))
+print(cash_calculator.get_today_cash_remained('usd'))

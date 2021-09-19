@@ -44,31 +44,30 @@ class Calculator:
 
 
 class CashCalculator(Calculator):
-    USD_RATE = 78.0
-    EURO_RATE = 87.0
-    RUB_RATE = 1.0
+    USD_RATE = float(78.0)
+    EURO_RATE = float(87.0)
+    RUB_RATE = float(1.0)
 
     def get_today_cash_remained(self, currency: str) -> str:
         """Сколько еще можно потратить."""
         currencies = {
             'usd': ('USD', self.USD_RATE),
             'eur': ('Euro', self.EURO_RATE),
-            'rub': ('руб', self.RUB_RATE),
-        }
+            'rub': ('руб', self.RUB_RATE)}
         if currency not in currencies:
             message = 'Валюта введена некорректно.'
             return message
         currency_name, currency_rate = currencies[currency]
         cash_remained = self.get_today_remained()
-        if cash_remained == 0:
+        if cash_remained <= 0:
             return 'Денег нет, держись'
 
-        today_spent_currency = round((cash_remained / currency_rate), 2)
+        today_spent_currency = round(abs(cash_remained / currency_rate), 2)
         if cash_remained > 0:
             return(f'На сегодня осталось {today_spent_currency} '
                    f'{currency_name}')
         else:
-            return(f'Денег нет, держись: твой долг - '
+            return(f'Денег нет, держись: твой долг '
                    f'{today_spent_currency} {currency_name}')
 
 

@@ -45,8 +45,8 @@ class Calculator:
 
 
 class CashCalculator(Calculator):
-    USD_RATE = 70
-    EURO_RATE = 80
+    USD_RATE = float(70.0)
+    EURO_RATE = float(80.0)
 
     def get_today_cash_remained(self, currency):
         today_stats = self.get_today_stats()

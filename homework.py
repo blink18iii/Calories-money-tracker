@@ -83,8 +83,4 @@ class CaloriesCalculator(Calculator):
                     f'но с общей калорийностью не более {spent_today} кКал')
         else:
             return 'Хватит есть!'
-
-
-cash_calculator = CashCalculator(1000)
-cash_calculator.add_record(Record(amount=1001, comment="Coffeeffee"))
-print(cash_calculator.get_today_cash_remained('usd'))
+            

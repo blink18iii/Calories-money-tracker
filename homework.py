@@ -45,8 +45,8 @@ class Calculator:
 
 
 class CashCalculator(Calculator):
-    USD_RATE = 73.12
-    EURO_RATE = 85.12
+    USD_RATE = 70
+    EURO_RATE = 80
 
     def get_today_cash_remained(self, currency):
         today_stats = self.get_today_stats()
@@ -83,4 +83,3 @@ class CaloriesCalculator(Calculator):
                     f'но с общей калорийностью не более {spent_today} кКал')
         else:
             return 'Хватит есть!'
-            

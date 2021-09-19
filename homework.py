@@ -52,9 +52,9 @@ class CashCalculator(Calculator):
         today_stats = self.get_today_stats()
         other_limit = self.limit - today_stats
         currencies = {
-             'usd': (self.USD_RATE, 'USD'),
-             'eur': (self.EURO_RATE, 'Euro'),
-             'rub': (1, 'руб')
+            'usd': (self.USD_RATE, 'USD'),
+            'eur': (self.EURO_RATE, 'Euro'),
+            'rub': (1, 'руб')
         }
 
         if currency in currencies:
@@ -64,7 +64,8 @@ class CashCalculator(Calculator):
             return ('Валюта не найдена')
         if today_stats < self.limit:
             return ('На сегодня осталось '
-                    f'{round(other_limit / currency_number, 2)} {currency_name}')
+                    f'{round(other_limit / currency_number, 2)} '
+                    f'{currency_name}')
         elif today_stats == self.limit:
             return ('Денег нет, держись')
         elif today_stats > self.limit:

@@ -5,7 +5,7 @@ date_format = '%d.%m.%Y'
 
 class Record:
     """Создаёт записи."""
-    def __init__(self, amount: float, comment: str, date = None):
+    def __init__(self, amount: float, comment: str, date=None):
         self.amount = amount
         self.comment = comment
         if date is not None:
@@ -55,7 +55,6 @@ class CashCalculator(Calculator):
             'eur': ('Euro', self.EURO_RATE),
             'rub': ('руб', self.RUB_RATE),
         }
-
         if currency not in currencies:
             message = 'Валюта введена некорректно.'
             return message

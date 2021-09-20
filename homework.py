@@ -20,25 +20,21 @@ class Calculator:
     def __init__(self, limit: float) -> None:
         self.limit = limit
         self.records = []
-        self.date = dt.date.today()
-
+        self.today = dt.datetime.today()
     def add_record(self, record: Record) -> None:
         """Добавление новой записи к списку."""
         self.records.append(record)
 
     def get_today_stats(self) -> float:
         """Сколько потрачено за сегодня."""
-        if self.date == dt.date.today():
-            return sum([record.amount
-                        for record in self.records
-                        ])
+        today = dt.datetime.today().date()
+        return float(sum(i.amount for i in self.records if i.date == today))
 
     def get_week_stats(self) -> float:
         """Сколько потрачено за 7 дней без сегодня."""
+        today = dt.datetime.today().date()
         date_week_ago = dt.date.today() - dt.timedelta(days=7)
-        return float(sum([record.amount
-                          for record in self.records
-                          if date_week_ago < record.date <= dt.date.today()]))
+        return float(sum(i.amount for i in self.records if date_week_ago < i.date <= today))
 
     def get_today_remained(self) -> float:
         """Сколько еще можно потратить за сегодня."""
@@ -86,8 +82,9 @@ class CaloriesCalculator(Calculator):
         else:
             return 'Хватит есть!'
 
-cash = CashCalculator(1100)
-cash.add_record(Record(amount=1000, comment="[izza"))
-cash.add_record((Record(amount=300,comment='pie')))
-print(cash.get_today_stats())
-print(cash.get_today_remained())
+cash = CashCalculator(1091)
+cash.add_record((Record(amount=1000,comment="pizza", date='19.09.2021')))
+cash.add_record((Record(amount=100,comment='pie')))
+print(cash.get_today_stats(), 'today stats--')
+print(cash.get_today_remained(), 'today remained ---')
+print(cash.get_week_stats(), 'week stats')

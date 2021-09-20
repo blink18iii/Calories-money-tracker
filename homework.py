@@ -62,7 +62,8 @@ class CashCalculator(Calculator):
             cash_remained = round(cash_remained / rate, 2)
             remains_abs = abs(cash_remained)
             if cash_remained > 0:
-                return f'На сегодня осталось {round(cash_remained, 2)} {currency}'
+                return (f'На сегодня осталось '
+                        f'{round(cash_remained, 2)} {currency}')
             else:
                 return ('Денег нет, держись: твой долг - '
                         f'{remains_abs} {currency}')

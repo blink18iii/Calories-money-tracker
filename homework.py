@@ -1,6 +1,6 @@
 import datetime as dt
 
-date_format = '%d.%m.%Y'
+DATE_FORMAT = '%d.%m.%Y'
 
 
 class Record:
@@ -10,7 +10,7 @@ class Record:
         self.amount = amount
         self.comment = comment
         if date is not None:
-            self.date = dt.datetime.strptime(date, date_format).date()
+            self.date = dt.datetime.strptime(date, DATE_FORMAT).date()
         else:
             self.date = dt.date.today()
 

@@ -52,22 +52,30 @@ class CashCalculator(Calculator):
         'rub': (1, 'руб')
     }
 
-    def get_today_cash_remained(self, currency):
-        today_cash = self.get_today_remained()
-        if currency in self.currencies:
-            currency_rate = self.currencies[currency][0]
-            currency_name = self.currencies[currency][1]
-        else:
-            return 'Валюта не найдена'
-        if today_cash == 0:
-            return "Денег нет, держись"
-        today_cash = round(today_cash / self.currencies[currency][1], 2)
-        if today_cash > 0:
-            return (f"На сегодня осталось "
-                    f"{today_cash} {self.currencies[currency][0]}")
-        else:
-            return (f"Денег нет, держись: твой долг - "
-                    f"{abs(today_cash)} {self.currencies[currency][0]}")
+class CashCalculator(Calculator):
+        USD_RATE = float(70.0)
+        EURO_RATE = float(80.0)
+
+        def get_today_cash_remained(self, currency):
+            cash_remained = self.get_today_remained()
+            if cash_remained == 0:
+                return ('Денег нет, держись')
+            currencies = {
+                "rub": ("руб", 1),
+                "usd": ("USD", self.USD_RATE),
+                "eur": ("Euro", self.EURO_RATE),
+            }
+            if currency in currencies:
+                currency, rate = currencies[currency]
+                cash_remained = round(cash_remained / rate, 2)
+                remains_abs = abs(cash_remained)
+                if cash_remained > 0:
+                    return f'На сегодня осталось {round(cash_remained, 2)} {currency}'
+                else:
+                    return ('Денег нет, держись: твой долг - '
+                            f'{remains_abs} {currency}')
+            else:
+                return 'Нет такой валюты'
 
 
 class CaloriesCalculator(Calculator):
@@ -85,5 +93,5 @@ cash = CashCalculator(1091)
 cash.add_record((Record(amount=1000, comment="pizza", date='19.09.2021')))
 cash.add_record((Record(amount=100, comment='pie')))
 print(cash.get_today_stats(), 'today stats--')
-print(cash.get_today_remained(), 'today remained ---')
+print(cash.get_today_cash_remained('usd'))
 print(cash.get_week_stats(), 'week stats')

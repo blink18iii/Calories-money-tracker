@@ -46,31 +46,28 @@ class Calculator:
 class CashCalculator(Calculator):
     USD_RATE = float(70.0)
     EURO_RATE = float(80.0)
+    currencies = {
+        'usd': (USD_RATE, 'USD'),
+        'eur': (EURO_RATE, 'Euro'),
+        'rub': (1, 'руб')
+    }
 
     def get_today_cash_remained(self, currency):
-        today_stats = self.get_today_stats()
-        other_limit = self.limit - today_stats
-        currencies = {
-            'usd': (self.USD_RATE, 'USD'),
-            'eur': (self.EURO_RATE, 'Euro'),
-            'rub': (1, 'руб')
-        }
-
-        if currency in currencies:
-            currency_rate = currencies[currency][0]
-            currency_name = currencies[currency][1]
+        today_cash = self.get_today_remained()
+        if currency in self.currencies:
+            currency_rate = self.currencies[currency][0]
+            currency_name = self.currencies[currency][1]
         else:
             return 'Валюта не найдена'
-        if today_stats < self.limit:
-            return ('На сегодня осталось '
-                    f'{round(other_limit / currency_rate, 2)} '
-                    f'{currency_name}')
-        elif today_stats == self.limit:
-            return 'Денег нет, держись'
-        elif today_stats > self.limit:
-            debt = abs(other_limit)
-            return ('Денег нет, держись: твой долг - '
-                    f'{round(debt / currency_rate, 2)} {currency_name}')
+        if today_cash == 0:
+            return "Денег нет, держись"
+        today_cash = round(today_cash / self.currencies[currency][1], 2)
+        if today_cash > 0:
+            return (f"На сегодня осталось "
+                    f"{today_cash} {self.currencies[currency][0]}")
+        else:
+            return (f"Денег нет, держись: твой долг - "
+                    f"{abs(today_cash)} {self.currencies[currency][0]}")
 
 
 class CaloriesCalculator(Calculator):

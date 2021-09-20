@@ -20,6 +20,7 @@ class Calculator:
     def __init__(self, limit: float) -> None:
         self.limit = limit
         self.records = []
+        self.date = dt.date.today()
 
     def add_record(self, record: Record) -> None:
         """Добавление новой записи к списку."""
@@ -27,9 +28,10 @@ class Calculator:
 
     def get_today_stats(self) -> float:
         """Сколько потрачено за сегодня."""
-        return sum([record.amount
-                    for record in self.records
-                    if record.date == dt.date.today()])
+        if self.date == dt.date.today():
+            return sum([record.amount
+                        for record in self.records
+                        ])
 
     def get_week_stats(self) -> float:
         """Сколько потрачено за 7 дней без сегодня."""
@@ -61,13 +63,13 @@ class CashCalculator(Calculator):
             currency_rate = currencies[currency][0]
             currency_name = currencies[currency][1]
         else:
-            return ('Валюта не найдена')
+            return 'Валюта не найдена'
         if today_stats < self.limit:
             return ('На сегодня осталось '
                     f'{round(other_limit / currency_rate, 2)} '
                     f'{currency_name}')
         elif today_stats == self.limit:
-            return ('Денег нет, держись')
+            return 'Денег нет, держись'
         elif today_stats > self.limit:
             debt = abs(other_limit)
             return ('Денег нет, держись: твой долг - '
@@ -83,3 +85,9 @@ class CaloriesCalculator(Calculator):
                     f'но с общей калорийностью не более {spent_today} кКал')
         else:
             return 'Хватит есть!'
+
+cash = CashCalculator(1100)
+cash.add_record(Record(amount=1000, comment="[izza"))
+cash.add_record((Record(amount=300,comment='pie')))
+print(cash.get_today_stats())
+print(cash.get_today_remained())

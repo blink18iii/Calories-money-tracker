@@ -21,6 +21,7 @@ class Calculator:
         self.limit = limit
         self.records = []
         self.today = dt.datetime.today()
+
     def add_record(self, record: Record) -> None:
         """Добавление новой записи к списку."""
         self.records.append(record)
@@ -82,9 +83,10 @@ class CaloriesCalculator(Calculator):
         else:
             return 'Хватит есть!'
 
+
 cash = CashCalculator(1091)
-cash.add_record((Record(amount=1000,comment="pizza", date='19.09.2021')))
-cash.add_record((Record(amount=100,comment='pie')))
+cash.add_record((Record(amount=1000, comment="pizza", date='19.09.2021')))
+cash.add_record((Record(amount=100, comment='pie')))
 print(cash.get_today_stats(), 'today stats--')
 print(cash.get_today_remained(), 'today remained ---')
 print(cash.get_week_stats(), 'week stats')

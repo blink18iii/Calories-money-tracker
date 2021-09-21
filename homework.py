@@ -66,7 +66,7 @@ class CashCalculator(Calculator):
                 return (f'На сегодня осталось '
                         f'{cash_remained} {currency}')
             return ('Денег нет, держись: твой долг - '
-                        f'{remains_abs} {currency}')
+                    f'{remains_abs} {currency}')
 
 
 class CaloriesCalculator(Calculator):
@@ -77,16 +77,3 @@ class CaloriesCalculator(Calculator):
             return (f'Сегодня можно съесть что-нибудь ещё, '
                     f'но с общей калорийностью не более {spent_today} кКал')
         return 'Хватит есть!'
-
-
-cash = CashCalculator(101)
-cash.add_record(Record(amount=100, comment='pizza'))
-print(cash.get_today_cash_remained('rub'))
-cash.add_record(Record(amount=100, comment='pie'))
-print(cash.get_today_cash_remained('rub'))
-cal = CaloriesCalculator(101)
-cal.add_record((Record(amount=100, comment='cal1')))
-print(cal.get_calories_remained())
-cal.add_record((Record(amount=100, comment='cal2')))
-print(cal.get_calories_remained())
-print(cash.get_week_stats())

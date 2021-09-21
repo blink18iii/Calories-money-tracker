@@ -20,7 +20,6 @@ class Calculator:
     def __init__(self, limit: float) -> None:
         self.limit = limit
         self.records = []
-        self.today = dt.datetime.today()
 
     def add_record(self, record: Record) -> None:
         """Добавление новой записи к списку."""
@@ -50,25 +49,24 @@ class CashCalculator(Calculator):
 
     def get_today_cash_remained(self, currency):
         cash_remained = self.get_today_remained()
-        if cash_remained == 0:
-            return 'Денег нет, держись'
         currencies = {
             "rub": ("руб", 1),
             "usd": ("USD", self.USD_RATE),
             "eur": ("Euro", self.EURO_RATE),
         }
+        if cash_remained == 0:
+            return 'Денег нет, держись'
+        if currency not in currencies:
+            return 'Нет такой валюты'
         if currency in currencies:
             currency, rate = currencies[currency]
             cash_remained = round(cash_remained / rate, 2)
             remains_abs = abs(cash_remained)
             if cash_remained > 0:
                 return (f'На сегодня осталось '
-                        f'{round(cash_remained, 2)} {currency}')
-            else:
-                return ('Денег нет, держись: твой долг - '
+                        f'{cash_remained} {currency}')
+            return ('Денег нет, держись: твой долг - '
                         f'{remains_abs} {currency}')
-        else:
-            return 'Нет такой валюты'
 
 
 class CaloriesCalculator(Calculator):
@@ -78,5 +76,17 @@ class CaloriesCalculator(Calculator):
         if spent_today > 0:
             return (f'Сегодня можно съесть что-нибудь ещё, '
                     f'но с общей калорийностью не более {spent_today} кКал')
-        else:
-            return 'Хватит есть!'
+        return 'Хватит есть!'
+
+
+cash = CashCalculator(101)
+cash.add_record(Record(amount=100, comment='pizza'))
+print(cash.get_today_cash_remained('rub'))
+cash.add_record(Record(amount=100, comment='pie'))
+print(cash.get_today_cash_remained('rub'))
+cal = CaloriesCalculator(101)
+cal.add_record((Record(amount=100, comment='cal1')))
+print(cal.get_calories_remained())
+cal.add_record((Record(amount=100, comment='cal2')))
+print(cal.get_calories_remained())
+print(cash.get_week_stats())

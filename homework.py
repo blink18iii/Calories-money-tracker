@@ -58,15 +58,14 @@ class CashCalculator(Calculator):
             return 'Денег нет, держись'
         if currency not in currencies:
             return 'Нет такой валюты'
-        if currency in currencies:
-            currency, rate = currencies[currency]
-            cash_remained = round(cash_remained / rate, 2)
-            remains_abs = abs(cash_remained)
-            if cash_remained > 0:
-                return (f'На сегодня осталось '
-                        f'{cash_remained} {currency}')
-            return ('Денег нет, держись: твой долг - '
-                    f'{remains_abs} {currency}')
+        currency, rate = currencies[currency]
+        cash_remained = round(cash_remained / rate, 2)
+        remains_abs = abs(cash_remained)
+        if cash_remained > 0:
+            return (f'На сегодня осталось '
+                    f'{cash_remained} {currency}')
+        return ('Денег нет, держись: твой долг - '
+                f'{remains_abs} {currency}')
 
 
 class CaloriesCalculator(Calculator):
@@ -77,3 +76,12 @@ class CaloriesCalculator(Calculator):
             return (f'Сегодня можно съесть что-нибудь ещё, '
                     f'но с общей калорийностью не более {spent_today} кКал')
         return 'Хватит есть!'
+
+
+cash = CashCalculator(3000)
+cash.add_record(Record(amount=1000, comment='pizza'))
+print(cash.get_today_cash_remained('rub'))
+cash.add_record(Record(amount=1000, comment='pizza'))
+print(cash.get_today_cash_remained('rub'))
+print(cash.get_today_remained())
+print(cash.get_today_cash_remained('eur'))

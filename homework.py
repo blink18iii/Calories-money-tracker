@@ -76,19 +76,3 @@ class CaloriesCalculator(Calculator):
             return (f'Сегодня можно съесть что-нибудь ещё, '
                     f'но с общей калорийностью не более {spent_today} кКал')
         return 'Хватит есть!'
-
-# cash = CashCalculator(3000)
-# cash.add_record(Record(amount=1000, comment='pizza'))
-# print(cash.get_today_cash_remained('rub'))
-# cash.add_record(Record(amount=1000, comment='pizza'))
-# print(cash.get_today_cash_remained('rub'))
-# print(cash.get_today_remained())
-# print(cash.get_today_cash_remained('eur'))
-# cash.add_record(Record(amount=1000, comment='pizza'))
-# print(cash.get_today_cash_remained('rub'))
-# print(cash.get_today_remained())
-# print(cash.get_today_cash_remained('eur'))
-# cash.add_record(Record(amount=1000, comment='pizza'))
-# print(cash.get_today_cash_remained('rub'))
-# print(cash.get_today_remained())
-# print(cash.get_today_cash_remained('eur'))

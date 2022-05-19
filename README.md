@@ -13,6 +13,7 @@ python -m venv venv
 . venv/Scripts/activate
 ```
 Не забудьте установить правильный интерпретатор.
+
 Установить зависимости из файла requirements.txt:
 ```
 cd hw_python_oop/

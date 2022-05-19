@@ -51,21 +51,13 @@ pip install -r requirements.txt
 Примеры таких записей:
 
 ```
- #для CashCalculator 
- 
-r1 = Record(amount=145, comment='Безудержный шопинг', date='08.03.2019')
-r2 = Record(amount=1568,
-            comment='Наполнение потребительской корзины',
-            date='09.03.2019')
-r3 = Record(amount=691, comment='Катание на такси', date='08.03.2019')
-
-# для CaloriesCalculator
-
-r4 = Record(amount=1186,
-            comment='Кусок тортика. И ещё один.',
-            date='24.02.2019')
-r5 = Record(amount=84, comment='Йогурт.', date='23.02.2019')
-r6 = Record(amount=1140, comment='Баночка чипсов.', date='24.02.2019')
+cash_calc = CashCalculator(1000) # Ставим лимит на деньги
+calories_calc = CaloriesCalculator(1000) # Ставим лимит на каллории
+cash_calc.add_record(Record(amount=800, comment='pizza')) # Создаем запись потраченных денег
+print(cash_calc.get_today_cash_remained('rub')) # Проверяем остаток денег после покупки
+print(calories_calc.get_calories_remained()) # Проверяем какой лимит каллорий
+calories_calc.add_record(Record(amount=100, comment='покушать')) # Едим и отнимаем каллории от лимита
+print(calories_calc.get_calories_remained()) # Проверяем какой лимит каллорий остался
 ```
 
 ## Подробнее о формате вывода

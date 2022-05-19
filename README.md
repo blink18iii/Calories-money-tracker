@@ -14,6 +14,8 @@ python -m venv venv
 ```
 Установить зависимости из файла requirements.txt:
 ```
+cd hw_python_oop/
+
 python -m pip install --upgrade pip
 
 pip install -r requirements.txt

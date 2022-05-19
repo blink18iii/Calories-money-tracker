@@ -52,12 +52,12 @@ pip install -r requirements.txt
 
 ```
 cash_calc = CashCalculator(1000) # Ставим лимит на деньги
-calories_calc = CaloriesCalculator(1000) # Ставим лимит на каллории
+calories_calc = CaloriesCalculator(1000) # Ставим лимит на калории
 cash_calc.add_record(Record(amount=800, comment='pizza')) # Создаем запись потраченных денег
 print(cash_calc.get_today_cash_remained('rub')) # Проверяем остаток денег после покупки
-print(calories_calc.get_calories_remained()) # Проверяем какой лимит каллорий
+print(calories_calc.get_calories_remained()) # Проверяем какой лимит калорий
 calories_calc.add_record(Record(amount=100, comment='покушать')) # Едим и отнимаем каллории от лимита
-print(calories_calc.get_calories_remained()) # Проверяем какой лимит каллорий остался
+print(calories_calc.get_calories_remained()) # Проверяем какой лимит калорий остался
 ```
 
 ## Подробнее о формате вывода
